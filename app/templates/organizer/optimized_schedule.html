@@ -1,0 +1,22 @@
+{% extends 'organizer/organizer_base.html' %}
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Event</th>
+            <th>Artist</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for artist, event in schedule %}
+        <tr>
+            <td>{{ event.title }}</td>
+            <td>{{ artist.name }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{{ url_for('app.organizer_events') }}" class="btn btn-primary">Back to Events</a>
+{% endblock %}

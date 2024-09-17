@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Bootstrap 4.5 CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <!-- <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet"> -->
+
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<!-- My CSS -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='admin/style.css')}}">
+    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+
+
+	<title>{{title}} | ABESS</title>
+</head>
+<body>
+
+	
+
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="{{ url_for('app.organizer_dashboard')}}" class="brand">
+			<i class='bx bxs-music'></i>
+			<span class="text">A B E S S</span>
+		</a>
+		<ul class="side-menu top">
+			<li class="{{ 'active' if request.path == url_for('app.organizer_dashboard') else '' }}">
+				<a href="{{ url_for('app.organizer_dashboard')}}">
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text">Dashboard</span>
+				</a>
+			</li>
+			<li class="{{ 'active' if request.path == url_for('app.organizer_events') or (event and (request.path == url_for('app.create_event', event_id=event.id) or request.path == url_for('app.update_event', event_id=event.id))) else '' }}">
+				<a href="{{ url_for('app.organizer_events')}}">
+					<i class='bx bxs-shopping-bag-alt' ></i>
+					<span class="text">Event Management</span>
+				</a>
+			</li>
+			<li class="{{ 'active' if request.path == url_for('app.organizer_bookings') else '' }}">
+				<a href="{{ url_for('app.organizer_bookings')}}">
+					<i class='bx bxs-doughnut-chart' ></i>
+					<span class="text">Artist Booking</span>
+				</a>
+			</li>
+			<li class="{{ 'active' if request.path == url_for('app.organizer_notifications') else '' }}">
+				<a href="{{ url_for('app.organizer_notifications')}}">
+					<i class='bx bxs-message-dots' ></i>
+					<span class="text">Notifications</span>
+				</a>
+			</li>
+			<li class="{{ 'active' if request.path == url_for('app.organizer_profile') else '' }}">
+				<a href="{{ url_for('app.organizer_profile')}}">
+					<i class='bx bxs-group' ></i>
+					<span class="text">My Profile</span>
+				</a>
+			</li>
+		</ul>
+		<ul class="side-menu">
+			<li>
+				<a href="#">
+					<i class='bx bxs-cog' ></i>
+					<span class="text"></span>
+				</a>
+			</li>
+			<li>
+				<a href="{{ url_for('app.logout')}}" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<!-- SIDEBAR -->
+
+
+
+	<!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav class="d-flex justify-content-between">
+			<i class='bx bx-menu' ></i>
+	
+			<a href="#" class="profile">
+				{% if current_user.organizer.photo %}
+				<img src="{{ url_for('static', filename='profile_photos/'+ current_user.organizer.photo) }}">
+				{% else %}
+				<img src="{{ url_for('static', filename='images/avatar.png') }}">
+				{% endif %}
+			</a>
+		</nav>
+		<!-- NAVBAR -->
+
+		<!-- MAIN -->
+		 <main class="h-100">
+			{% with messages = get_flashed_messages(with_categories=True) %}
+				{% if messages %}
+				{% for category, message in messages %}
+					<div class="error-alert">
+						<div class="alert alert-{{ category }} auto-dismissible-alert fade show mt-4" role="alert">
+							{{ message }}
+						</div>
+					</div>
+				{% endfor %}
+				{% endif %}
+			{% endwith %}
+
+			{% block content %}
+			<!-- Page content will be injected here -->
+			{% endblock %}
+			<!-- MAIN -->
+		 </main>
+		
+	</section>
+	<!-- CONTENT -->
+	
+
+	<footer class="bg-white mb-0 text-center p-3">
+		<p>&copy A B B E S S Project | 2024</p>
+	</footer>
+
+	<!-- Bootstrap 4.5 JS and Dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+
+    <!-- FONT AWESOME SCRIPT-->
+    <script src="https://kit.fontawesome.com/af77674fe5.js"></script>
+
+
+	<script src="{{ url_for('static', filename='admin/script.js') }}"></script>
+</body>
+</html>

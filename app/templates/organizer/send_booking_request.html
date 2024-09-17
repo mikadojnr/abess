@@ -1,0 +1,21 @@
+{% extends "organizer/organizer_base.html" %}
+
+{% block content %}
+<h2>Send Booking Request</h2>
+<p><strong>Event:</strong> {{ event.title}}</p>
+<form method="POST" action="">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.artists.label(class="form-label") }}
+        {{ form.artists(class="form-control") }}
+    </div>
+    <div class="form-group">
+        {{ form.important_artists.label(class="form-label") }}
+        {{ form.important_artists(class="form-control") }}
+    </div>
+
+    <button type="submit" class="btn btn-primary btn">{{ form.submit.label.text }}</button>
+
+</form>
+    
+{% endblock  %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container" style="padding-top: 100px;">
+    <div class="row">
+        <div class="col-md-8">
+            
+            {% if event.photo %}
+            <img src="{{ url_for('static', filename='uploads/events/' + event.photo) }}" alt="{{ event.title }}" class="img-fluid rounded-lg mb-4">
+            {% else %}
+            <img src="{{ url_for('static', filename='default_event.jpg') }}" alt="Default Photo" class="img-fluid mb-4">
+            {% endif %}
+
+            <h2>{{ event.title }}</h2>
+            <p class="text-muted">Date: {{ event.start_date.strftime('%Y-%m-%d') }} {{ event.start_time.strftime('%H:%M') }}</p>
+
+
+            <p>{{ event.description }}</p>
+            <h5>Event Details</h5>
+            <ul>
+                <li><strong>Venue:</strong> {{ event.venue }}</li>
+                <li><strong>City:</strong> {{ event.city }}</li>
+                <li><strong>State:</strong> {{ event.state }}</li>
+                <li><strong>Status:</strong> {{ event.status }}</li>
+            </ul>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Organizer Info</h5>
+                    <p><strong>{{ event.organizer.name }}</strong></p>
+                    <p>{{ event.organizer.company_name }}</p>
+                    <p>Phone: {{ event.organizer.phone }}</p>
+                    <a href="{{ event.organizer.facebook_link }}" target="_blank" class="btn btn-primary btn-sm">Facebook</a>
+                    <a href="{{ event.organizer.website_link }}" target="_blank" class="btn btn-secondary btn-sm">Website</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

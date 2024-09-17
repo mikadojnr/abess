@@ -1,0 +1,60 @@
+{% extends 'organizer/organizer_base.html' %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header">
+            <h4>Notifications</h4>
+        </div>
+        <div class="card-body">
+
+        <div class="accordion" id="notificationAccordion">
+            {% for notification in notifications %}
+                <div class="card">
+                    <div class="card-header" id="heading{{ notification.id }}">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{ notification.id }}" aria-expanded="false" aria-controls="collapse{{ notification.id }}">
+                                {% if not notification.read %}
+                                    <strong>{{ notification.message[:25] }}...</strong> <!-- Show bold for unread notifications -->
+                                {% else %}
+                                    {{ notification.message[:25] }}...
+                                {% endif %}
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapse{{ notification.id }}" class="collapse" aria-labelledby="heading{{ notification.id }}" data-parent="#notificationAccordion">
+                        <div class="card-body">
+                            <p>{{ notification.message }}</p>
+                            <small class="text-muted">Received on: {{ notification.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</small>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <p>No notifications available.</p>
+            {% endfor %}
+        </div>
+        
+
+<script>
+    document.querySelectorAll('.accordion-button').forEach(button => {
+        button.addEventListener('click', function() {
+            // When the notification is clicked, send a request to mark it as read
+            const notificationId = this.parentElement.id.replace('heading', '');
+            fetch(`/organizer/notifications/mark_read/${notificationId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    this.querySelector('strong').style.fontWeight = 'normal';
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    });
+</script>
+        </div>
+    </div>
+{% endblock content %}

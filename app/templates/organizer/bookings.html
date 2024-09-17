@@ -1,0 +1,73 @@
+{% extends 'organizer/organizer_base.html' %}
+
+{% block content %}
+    
+    <div class="card">
+        <div class="card-header">
+            <div class="d-flex justify-content-between">
+                <h4>All Bookings</h4>
+                <a href="{{ url_for('app.optimize_schedule') }}" class="btn btn-info">Booking Optimization</a>
+            </div>
+        </div>
+        <div class="card-body">
+            {% if bookings.items %}
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Date sent</th>
+                            <th>Photo</th>
+                            <th>Artist</th>
+                            <th>Event</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for booking in bookings %}
+                        <tr>
+                            <td>{{ booking.created_at.strftime('%Y-%m-%d @%H:%M') }}</td>
+                            <!-- Event Photo -->
+                            <td>
+                                {% if booking.artist.photo %}
+                                    <img class="img-thumbnail" src="{{ url_for('static', filename='profile_photos/' + booking.artist.photo) }}" alt="Artist Photo" width="80" height="80">
+                                {% else %}
+                                    <img class="img-thumbnail" src="{{ url_for('static', filename='images/avatar.png') }}" alt="Default Photo" width="80" height="80">
+                                {% endif %}
+                            </td>
+    
+                            <!-- Event Title -->
+                            <td>{{ booking.artist.name }}</td>
+    
+                            <!-- Event Date -->
+                            <td>{{ booking.event.title }}</td>
+    
+                            <!-- Event Status Dropdown -->
+                            <td>
+                                {{ booking.status}}
+                            </td>
+    
+                            <!-- Actions Dropdown -->
+                            <td>
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a href="#" class="dropdown-item">Action One</a>
+                                        <a href="#" class="dropdown-item">Action Two</a>
+                                        <a href="#" class="dropdown-item">Action Three</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+                <p>No bookings found!</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}

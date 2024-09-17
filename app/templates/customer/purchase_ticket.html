@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div style="padding-top: 100px;">
+    <h2>Purchase Ticket for {{ event.title }}</h2>
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.ticket_id.label(class="form-label") }}
+            {{ form.ticket_id(class="form-control") }}
+        </div>
+        <button type="submit" class="btn btn-primary">{{ form.submit() }}</button>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,301 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+    .event-card {
+        border: 2px solid transparent;
+        transition: border 0.3s ease;
+    }
+    
+    .event-card:hover {
+        border: 2px solid pink;
+    }
+    
+    .image-container {
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .image-container img {
+        transition: transform 0.3s ease;
+        width: 100%;
+    }
+    
+    .image-container:hover img {
+        transform: scale(1.1);
+    }
+    
+    .title {
+        transition: color 0.3s ease;
+    }
+    
+    .title:hover {
+        color: pink;
+    }
+    
+    /* Badge Styling */
+    .badge {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        padding: 5px 10px;
+        border-radius: 5px;
+        color: white;
+        font-size: 12px;
+    }
+    
+    .badge-conference {
+        background-color: green;
+    }
+    
+    .badge-sport {
+        background-color: yellow;
+        color: black;
+    }
+    
+    /* Price Styling */
+    .price {
+        font-size: 16px;
+        color: red;
+        font-weight: bold;
+    }
+
+    .card-img-top {
+        object-fit: cover;
+        height: 200px;
+        width: 100%;
+    }
+
+
+    /* Section title styling */
+.section-title {
+    font-weight: bold;
+    color: #333;
+}
+
+.section-subtitle {
+    color: #888;
+    font-size: 14px;
+}
+
+/* Artist Card Styling */
+.artist-card {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    transition: box-shadow 0.3s ease;
+}
+
+.artist-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Artist Image */
+.artist-img {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+}
+
+/* Artist Info */
+.artist-info {
+    flex: 1;
+}
+
+.artist-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.artist-genre {
+    font-style: italic;
+    color: gray;
+}
+
+.artist-rating span {
+    color: gold;
+    font-size: 16px;
+}
+    
+</style>
+
+
+<div class="home" style="padding-top: 100px;">
+    <div class="container">
+        <div class="row">
+            <!-- Column 1: Always visible -->
+            <div class="col">
+                <div class=" d-flex justify-content-center flex-column align-items-center">
+                    <h1 class="monospace">AB<span class="text-danger">ESS <i class="fa fa-music"></i></span> </h1>
+                    <p>Where musical artistes meet event organizers</p>
+                            
+                        <div class="mt-5">
+                            <a href="#" class="btn btn-lg btn-info m-2">Find Events</a>
+                            <a href="#" class="btn btn-lg btn-secondary m-2">View Artistes</a>
+                        </div>
+
+                        <div>
+                            <a href="#" class="btn btn-lg btn-info m-2">Book an Artiste</a> 
+                            <a href="#" class="btn btn-lg btn-secondary m-2">Add Event</a>
+                        </div>
+                        
+                   
+                </div>
+            </div>
+    
+            <!-- Column 2: Hidden on small and very small screens, visible from medium screens upwards -->
+            <div class="col d-none d-lg-block">
+                <div class="">
+                    <img src="{{ url_for('static', filename='images/artistes.png')}}" alt="" style="width: 100%;" class="rounded">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class=" py-5 mt-5" style="background-color: #f2f2f2;">
+        <div class="container">
+            <!-- Featured Artistes Section -->
+            <div class="row mb-4">
+                <div class="col text-center">
+                    <h2 class="monospace">Featured Artistes</h2>
+                    <p class="section-subtitle">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                </div>
+            </div>
+            <!-- Artistes Cards -->
+            <div class="row">
+                <!-- Card 1 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="artist-card d-flex align-items-center">
+                        <img src="https://via.placeholder.com/80" class="artist-img img-fluid" alt="Artist Image">
+                        <div class="artist-info ml-3">
+                            <h5 class="artist-name">Mikado</h5>
+                            <p class="artist-genre">Afro-beat</p>
+                            <div class="artist-rating">
+                                <span>⭐⭐⭐⭐</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="artist-card d-flex align-items-center">
+                        <img src="https://via.placeholder.com/80" class="artist-img img-fluid" alt="Artist Image">
+                        <div class="artist-info ml-3">
+                            <h5 class="artist-name">Mikado</h5>
+                            <p class="artist-genre">Afro-beat</p>
+                            <div class="artist-rating">
+                                <span>⭐⭐⭐</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="artist-card d-flex align-items-center">
+                        <img src="https://via.placeholder.com/80" class="artist-img img-fluid" alt="Artist Image">
+                        <div class="artist-info ml-3">
+                            <h5 class="artist-name">Mikado</h5>
+                            <p class="artist-genre">Afro-beat</p>
+                            <div class="artist-rating">
+                                <span>⭐⭐⭐⭐</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 4 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="artist-card d-flex align-items-center">
+                        <img src="https://via.placeholder.com/80" class="artist-img img-fluid" alt="Artist Image">
+                        <div class="artist-info ml-3">
+                            <h5 class="artist-name">Mikado</h5>
+                            <p class="artist-genre">Afro-beat</p>
+                            <div class="artist-rating">
+                                <span>⭐⭐⭐</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+            
+    <div class="">
+        <div class="my-5 container">
+            <div class="row mb-4">
+                <div class="col text-center">
+                    <h2 class="monospace">Upcoming Events</h2>
+                    <p class="section-subtitle">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-lg-4 ">
+                    <div class="card event-card shadow">
+                        <div class="image-container">
+                            <img src="{{ url_for('static', filename='images/default_event.jpg')}}" class="card-img-top" alt="Event Image">
+                            <span class="badge badge-conference">Conference</span>
+                        </div>
+                        <div class="card-body text-center">
+                            <h5 class="card-title title">Lorem Ipsum Dolor</h5>
+                            <p class="card-text">
+                                <i class="far fa-clock"></i> Thu, September, 2025, 09:30 am<br>
+                                <i class="fas fa-map-marker-alt"></i> Victoria Island, NG
+                            </p>
+                            <hr>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <button class="btn btn-dark">Get Ticket</button>
+                                <span class="price">$20.10</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="col-sm-6 col-lg-4 ">
+                    <div class="card event-card shadow">
+                        <div class="image-container">
+                            <img src="{{ url_for('static', filename='images/artistes.png')}}" class="card-img-top" alt="Event Image">
+                            <span class="badge badge-sport">Sport</span>
+                        </div>
+                        <div class="card-body text-center">
+                            <h5 class="card-title title">Lorem Ipsum Dolor</h5>
+                            <p class="card-text">
+                                <i class="far fa-clock"></i> Thu, September, 2025, 09:30 am<br>
+                                <i class="fas fa-map-marker-alt"></i> Victoria Island, NG
+                            </p>
+                            <hr>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <button class="btn btn-dark">Get Ticket</button>
+                                <span class="price">$20.10</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="col-sm-6 col-lg-4 ">
+                    <div class="card event-card shadow">
+                        <div class="image-container">
+                            <img src="{{ url_for('static', filename='images/auth_bg.jpg')}}" class="card-img-top" alt="Event Image">
+                            <span class="badge badge-conference">Conference</span>
+                        </div>
+                        <div class="card-body text-center">
+                            <h5 class="card-title title">Lorem Ipsum Dolor</h5>
+                            <p class="card-text">
+                                <i class="far fa-clock"></i> Thu, September, 2025, 09:30 am<br>
+                                <i class="fas fa-map-marker-alt"></i> Victoria Island, NG
+                            </p>
+                            <hr>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <button class="btn btn-dark">Get Ticket</button>
+                                <span class="price">$20.10</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>        
+    
+</div>
+{% endblock %}

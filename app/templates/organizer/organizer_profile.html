@@ -1,0 +1,131 @@
+{% extends 'organizer/organizer_base.html' %}
+
+{% block content %}
+    
+    <div class="card">
+        <div class="card-header">
+            <h4 class="monospace">{{ organizer.name }}</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    {% if organizer.photo %}
+                    <img src="{{ url_for('static', filename='profile_photos/' + organizer.photo) }}" class="img-fluid rounded-circle" alt="Profile Photo">
+                    {% else %}
+                    <img src="{{ url_for('static', filename='avatar.png') }}" class="img-fluid rounded-circle" alt="Default Photo">
+                    {% endif %}
+
+                    <p class="text-center mt-3">{{ organizer.portfolio}}</p>
+                </div>
+                <div class="col-md-9">
+                    <p><strong>Company Name:</strong> {{ organizer.company_name }}</p>
+                    <p><strong>Email:</strong> {{ organizer.user.email }}</p>
+                    <p><strong>Phone:</strong> {{ organizer.phone }}</p>
+                    <p><strong>City:</strong> {{ organizer.city }}</p>
+                    <p><strong>State:</strong> {{ organizer.state }}</p>
+                    <p><strong>Facebook Link:</strong> <a href="{{ organizer.facebook_link }}" class="text-warning" target="_blank">{{ organizer.facebook_link }}</a></p>
+                    <p><strong>Website:</strong> <a href="{{ organizer.website_link }}" class="text-warning" target="_blank">{{ organizer.website_link }}</a></p>
+                    <a href="#updateProfileForm" class="btn btn-warning mt-3" data-toggle="collapse">Edit Profile</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Update Form -->
+        <div id="updateProfileForm" class="collapse mt-4">
+            <div class="card">
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data">
+                        {{ form.hidden_tag() }}
+
+                        <div class="form-group">
+                            {{ form.name.label(class="form-label") }}
+                            {{ form.name(class="form-control") }}
+                            {% for error in form.name.errors %}
+                            <div class="text-danger">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form.company_name.label(class="form-label") }}
+                            {{ form.company_name(class="form-control") }}
+                            {% for error in form.company_name.errors %}
+                            <div class="text-danger">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-6">
+                                {{ form.phone.label(class="form-label") }}
+                                {{ form.phone(class="form-control") }}
+                                {% for error in form.phone.errors %}
+                                <div class="text-danger">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+    
+                            <div class="form-group col-6">
+                                {{ form.gender.label(class="fo6rm-label") }}
+                                {{ form.gender(class="form-control") }}
+                                {% if form.gender.errors %}
+                                    <small class="text-danger">{{ form.gender.errors[0] }}</small>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-6">
+                                {{ form.city.label(class="form-label") }}
+                                {{ form.city(class="form-control") }}
+                                {% for error in form.city.errors %}
+                                <div class="text-danger">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+    
+                            <div class="form-group col-6">
+                                {{ form.state.label(class="form-label") }}
+                                {{ form.state(class="form-control") }}
+                                {% for error in form.state.errors %}
+                                <div class="text-danger">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+    
+                        </div>
+                        
+                        <div class="row">
+                            <div class="form-group col-6">
+                                {{ form.facebook_link.label(class="form-label") }}
+                                {{ form.facebook_link(class="form-control") }}
+                                {% for error in form.facebook_link.errors %}
+                                <div class="text-danger">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+    
+                            <div class="form-group col-6">
+                                {{ form.website_link.label(class="form-label") }}
+                                {{ form.website_link(class="form-control") }}
+                                {% for error in form.website_link.errors %}
+                                <div class="text-danger">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            {{ form.portfolio.label(class="form-label") }}
+                            {{ form.portfolio(class="form-control", size=64) }}
+                            {% if form.portfolio.errors %}
+                                <small class="text-danger">{{ form.portfolio.errors[0] }}</small>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form.photo.label(class="form-label") }}
+                            {{ form.photo(class="form-control-file") }}
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Update Profile</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    
+{% endblock content %}

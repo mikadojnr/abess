@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<h2>Respond to Booking Request for {{ booking_request.event.title }}</h2>
+<form method="POST" action="">
+    {{ form.hidden_tag() }}
+    <button type="submit" class="btn btn-success">{{ form.accept() }}</button>
+    <button type="submit" class="btn btn-danger">{{ form.decline() }}</button>
+</form>
+{% endblock %}
